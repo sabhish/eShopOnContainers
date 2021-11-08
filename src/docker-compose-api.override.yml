@@ -213,7 +213,7 @@ services:
     ports:
       - "5112:80"
     
-   webhooks-client:
+  webhooks-client:
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - Token=6168DB8D-DC58-4094-AF24-483278923590      # Webhooks are registered with this token (any value is valid) but the client won't check it
