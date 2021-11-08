@@ -27,3 +27,9 @@ services:
     #depends_on:
       #- webshoppingagg
       #- webshoppingapigw
+      
+  webhooks-client:
+    image: ${REGISTRY:-eshop}/webhooks.client:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Web/WebhookClient/Dockerfile
