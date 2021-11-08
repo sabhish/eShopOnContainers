@@ -1,18 +1,6 @@
 version: '3.4'
 
 services:
-
-  seq:
-    image: datalust/seq:latest
-
-  sqldata:
-    image: mcr.microsoft.com/mssql/server:2019-latest 
-
-  nosqldata:
-    image: mongo
-
-  basketdata:
-    image: redis:alpine
   
   rabbitmq:
     image: rabbitmq:3-management-alpine
@@ -22,8 +10,8 @@ services:
     build:
       context: .
       dockerfile: Services/Identity/Identity.API/Dockerfile
-    depends_on:
-      - sqldata
+    #depends_on:
+      #- sqldata
 
   basket-api:
     image: ${REGISTRY:-eshop}/basket.api:${PLATFORM:-linux}-${TAG:-latest}
@@ -31,7 +19,7 @@ services:
       context: .
       dockerfile: Services/Basket/Basket.API/Dockerfile
     depends_on:
-      - basketdata
+      #- basketdata
       - identity-api
       - rabbitmq
 
@@ -41,7 +29,7 @@ services:
       context: .
       dockerfile: Services/Catalog/Catalog.API/Dockerfile
     depends_on:
-      - sqldata
+      #- sqldata
       - rabbitmq
 
   ordering-api:
@@ -50,7 +38,7 @@ services:
       context: .
       dockerfile: Services/Ordering/Ordering.API/Dockerfile
     depends_on:
-      - sqldata
+      #- sqldata
       - rabbitmq
 
   ordering-backgroundtasks:
@@ -59,7 +47,7 @@ services:
       context: .
       dockerfile: Services/Ordering/Ordering.BackgroundTasks/Dockerfile
     depends_on:
-      - sqldata
+      #- sqldata
       - rabbitmq
 
   payment-api:
@@ -76,7 +64,7 @@ services:
       context: .
       dockerfile: Services/Webhooks/Webhooks.API/Dockerfile
     #depends_on:
-      - sqldata
+      #- sqldata
 
   mobileshoppingapigw:
     image: envoyproxy/envoy:v1.11.1
@@ -87,8 +75,8 @@ services:
       context: .
       dockerfile: ApiGateways/Mobile.Bff.Shopping/aggregator/Dockerfile
     depends_on:
-      - nosqldata
-      - sqldata
+      #- nosqldata
+      #- sqldata
       - identity-api
       - rabbitmq
       - ordering-api
@@ -101,8 +89,8 @@ services:
       context: .
       dockerfile: ApiGateways/Web.Bff.Shopping/aggregator/Dockerfile
     depends_on:
-      - nosqldata
-      - sqldata
+      #- nosqldata
+      #- sqldata
       - identity-api
       - rabbitmq
       - ordering-api
@@ -115,8 +103,8 @@ services:
       context: .
       dockerfile: Services/Ordering/Ordering.SignalrHub/Dockerfile
     depends_on:
-      - nosqldata
-      - sqldata
+      #- nosqldata
+      #- sqldata
       - identity-api
       - rabbitmq
       - ordering-api
