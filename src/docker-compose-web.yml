@@ -15,15 +15,15 @@ services:
       dockerfile: Web/WebSPA/Dockerfile
       args:
         NODE_IMAGE: ${NODE_IMAGE:-node:12.0}
-    depends_on:
-      - webshoppingagg
-      - webshoppingapigw
+    #depends_on:
+      #- webshoppingagg
+      #- webshoppingapigw
 
   webmvc:
     image: ${REGISTRY:-eshop}/webmvc:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Web/WebMVC/Dockerfile
-    depends_on:
-      - webshoppingagg
-      - webshoppingapigw
+    #depends_on:
+      #- webshoppingagg
+      #- webshoppingapigw
