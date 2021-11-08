@@ -15,7 +15,7 @@ services:
 
   sqldata:
     environment:
-      - SA_PASSWORD=Pass@word
+      - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
       - ACCEPT_EULA=Y
     ports:
       - "5433:1433"
@@ -33,11 +33,11 @@ services:
       - "6379:6379"
     volumes:
       - eshop-basketdata:/data
-      
-  volumes:
-    eshop-sqldata:
-      external: false
-    eshop-nosqldata:
-      external: false
-    eshop-basketdata:
-      external: false
+
+volumes:
+  eshop-sqldata:
+    external: false
+  eshop-nosqldata:
+    external: false
+  eshop-basketdata:
+    external: false
